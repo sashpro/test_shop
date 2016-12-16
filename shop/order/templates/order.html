@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<html>
+<head>
+
+<style>
+#id_kilo {
+    display: none;
+}
+</style>
+
+</head>
+<body>
+    <h4>Оформление заказа</h4>
+
+<form method="POST" action="" id="order_form">{% csrf_token %}
+
+<table>
+    <tr>
+        <td>
+		Выберите продукт
+        </td>
+        <td>
+		{{ form.type }}
+        </td>
+        <td>
+		{{ form.kilo }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+		<b>Итого:</b>
+        </td>
+        <td>
+		<b>{{ sum }}</b>
+        </td>
+    </tr>
+ </table>
+   <div class="row1">
+
+        <input type="submit" id="submit-button" value="Заказать">
+
+    </div>
+
+</form>
+
+</body>
+<script>
+
+    document.getElementById('id_type').onchange=function (e) {
+        alert(document.getElementById('id_type').value);
+    }
+</script>
+</html>
+
+
+
