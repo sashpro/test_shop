@@ -3,11 +3,11 @@
 <head>
 
 <style>
-#id_kilo {
-    display: none;
-}
+    #id_kilo {
+        display: none;
+    }
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
     <h4>Оформление заказа</h4>
@@ -37,18 +37,49 @@
  </table>
    <div class="row1">
 
-        <input type="submit" id="submit-button" value="Заказать">
+        <input type="submit" id="submit-button" value="Buy">
 
     </div>
 
 </form>
+<form method="POST" action="" id="delete_form">{% csrf_token %}
+        <input type='hidden' value="1" name="delete"/>
 
+        <input type='submit' id="clear-but" value="Clear basket"/>
+
+</form>
+
+<table>
+{% for key,values in cart %}
+    {% if values > 0 %}
+    <tr>
+    <td>
+       {{ key }}-{{ values }}
+    <td>
+    <td>
+        {% if key == 'C' %}
+        kg
+        {% endif %}
+    </td>
+    <tr>
+    {% endif %}
+{% endfor %}
+</table>
 </body>
 <script>
+    function show_kilo(){
+        if ($('#id_type').val() == 'C')
+            $('#id_kilo').css('display','block');
+        else
+            $('#id_kilo').css('display','none').val('0');
 
-    document.getElementById('id_type').onchange=function (e) {
-        alert(document.getElementById('id_type').value);
     }
+
+
+
+    $('#id_type').on('click',show_kilo);
+    $(document).ready( show_kilo);
+
 </script>
 </html>
 
